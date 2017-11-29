@@ -1,0 +1,6 @@
+rootProject.name = 'boids'
+include 'common'
+
+if (INCLUDE_ANDROID == "true") {
+    include 'android', 'android:app'
+}

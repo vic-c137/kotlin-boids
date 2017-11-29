@@ -1,0 +1,10 @@
+{
+  "name": "Boids simulation",
+  "description": "A Boids swarm intelligence simulation",
+  "env": {
+    "GRADLE_TASK": {
+      "description": "The Gradle task used by Heroku to build the app",
+      "value": "-Dorg.gradle.project.INCLUDE_ANDROID=false :backend:build"
+    }
+  }
+}
