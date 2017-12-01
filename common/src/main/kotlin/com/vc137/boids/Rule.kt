@@ -1,6 +1,8 @@
 package com.vc137.boids
 
 interface Rule {
+    val priority: Int
+    val settings: Map<String, Any>
     fun apply(target: Boid,
               swarm: List<Boid>,
               configuration: Configuration,

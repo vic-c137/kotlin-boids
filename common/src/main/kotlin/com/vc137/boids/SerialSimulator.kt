@@ -13,10 +13,10 @@ object SerialSimulator {
                     Point(0.0, 0.0, 0.0),
                     Point(0.0, 0.0, 0.0))
 
-            swarm.sortedBy { boid.position.distance(it.position) }
+            val sortedSwarm = swarm.sortedBy { boid.position.distance(it.position) }
 
-            rules.forEach {
-                val(target, d) = it.apply(boid, swarm, configuration, delta)
+            rules.sortedBy { it.priority }.forEach {
+                val(target, d) = it.apply(boid, sortedSwarm, configuration, delta)
                 boid = target
                 delta = d
             }
