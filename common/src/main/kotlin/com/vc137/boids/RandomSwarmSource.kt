@@ -14,12 +14,12 @@ object RandomSwarmSource {
             val endZ = configuration.worldBounds.second.z
 
             val id = Random().uuid()
-            val pos = Point(
+            val pos = Vector(
                     (startX..endX).random(),
                     (startY..endY).random(),
                     (startZ..endZ).random())
-            val vel = Point(0.0, 0.0, 0.0)
-            val acc = Point(0.0, 0.0, 0.0)
+            val vel = Vector(0.0, 0.0, 0.0)
+            val acc = Vector(0.0, 0.0, 0.0)
 
             boids.add(Boid(id, pos, vel, acc))
         }

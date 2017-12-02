@@ -4,12 +4,12 @@ import kotlin.math.sqrt
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class BoidTest {
+class VectorTest {
 
     @Test
     fun testDistanceReturnsExpectedResultCase1() {
-        val p1 = Point(0.0, 0.0, 0.0)
-        val p2 = Point(1.0, 1.0, 1.0)
+        val p1 = Vector(0.0, 0.0, 0.0)
+        val p2 = Vector(1.0, 1.0, 1.0)
 
         val dist = p1.distance(p2)
 
@@ -18,8 +18,8 @@ class BoidTest {
 
     @Test
     fun testDistanceReturnsExpectedResultCase2() {
-        val p1 = Point(0.0, 0.0, 0.0)
-        val p2 = Point(1.0, 0.0, 0.0)
+        val p1 = Vector(0.0, 0.0, 0.0)
+        val p2 = Vector(1.0, 0.0, 0.0)
 
         val dist = p1.distance(p2)
 
@@ -28,8 +28,8 @@ class BoidTest {
 
     @Test
     fun testDistanceReturnsExpectedResultCase3() {
-        val p1 = Point(0.0, 0.0, 0.0)
-        val p2 = Point(0.0, 0.0, 0.0)
+        val p1 = Vector(0.0, 0.0, 0.0)
+        val p2 = Vector(0.0, 0.0, 0.0)
 
         val dist = p1.distance(p2)
 

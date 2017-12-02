@@ -10,8 +10,8 @@ object SerialSimulator {
             var boid = it.copy()
 
             var delta = Pair(
-                    Point(0.0, 0.0, 0.0),
-                    Point(0.0, 0.0, 0.0))
+                    Vector(0.0, 0.0, 0.0),
+                    Vector(0.0, 0.0, 0.0))
 
             val sortedSwarm = swarm.sortedBy { boid.position.distance(it.position) }
 

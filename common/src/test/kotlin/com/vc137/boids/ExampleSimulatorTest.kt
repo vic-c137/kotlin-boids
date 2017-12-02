@@ -8,8 +8,8 @@ class ExampleSimulatorTest {
     @Test fun testSerialSimulator() {
 
         val worldBounds = Pair(
-                Point(0.0, 0.0, 0.0),
-                Point(0.0, 0.0, 0.0))
+                Vector(0.0, 0.0, 0.0),
+                Vector(0.0, 0.0, 0.0))
         val properties = mapOf<String, Any>()
         val configuration = Configuration(100, 50, worldBounds, properties)
         val rules = listOf<Rule>()
