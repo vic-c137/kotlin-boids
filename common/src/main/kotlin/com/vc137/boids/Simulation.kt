@@ -1,16 +1,16 @@
 package com.vc137.boids
 
-class Simulation(private val configuration: Configuration,
-                 private val rules: List<Rule>,
+class Simulation(val configuration: Configuration,
+                 val rules: List<Rule>,
                  private val simulator: (Configuration, List<Rule>, List<Boid>)->List<Boid>,
                  swarmSource: (Configuration) -> List<Boid> ) {
-    private var history: LinkedHashSet<State> = LinkedHashSet()
+    var history: LinkedHashSet<State> = LinkedHashSet()
 
     init {
         history.add(State(0, swarmSource.invoke(configuration)))
     }
 
-    fun run(): List<State> {
+    fun run(completion: (()->Boolean)? = null): List<State> {
         var complete = false
         while (!complete) {
 
@@ -22,8 +22,12 @@ class Simulation(private val configuration: Configuration,
 
             history.add(newState)
 
-            complete = history.last().iterationNumber == configuration.iterations
+            complete = completion?.invoke() ?: isComplete()
         }
         return history.toList()
     }
+}
+
+fun Simulation.isComplete(): Boolean {
+    return history.last().iterationNumber == configuration.iterations
 }

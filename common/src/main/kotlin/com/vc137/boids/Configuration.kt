@@ -6,4 +6,4 @@ import kotlinx.serialization.Serializable
 data class Configuration(val iterations: Long,
                          val swarmSize: Long,
                          val worldBounds: Pair<Vector, Vector>,
-                         val properties: Map<String, Any>)
+                         val settings: Map<String, Any>)

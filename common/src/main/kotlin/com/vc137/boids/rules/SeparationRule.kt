@@ -8,17 +8,16 @@ import kotlin.math.max
  * to the square of the distance between the target and its neighbors when
  * that distance drops below a defined cutoff point
  */
-class SeparationRule(override val priority: Int,
-                     override val settings: Map<String, Any>) : Rule {
+class SeparationRule(override val priority: Int) : Rule {
 
     override fun apply(target: Boid,
                        swarm: List<Boid>,
                        configuration: Configuration,
-                       delta: Pair<Vector, Vector>): Update {
+                       delta: List<Vector>): Update {
 
-        val k = settings.getK()
-        val separation = settings.getSeparation()
-        val cutoff = settings.getSeparationCutoff()
+        val k = configuration.settings.getK()
+        val separation = configuration.settings.getSeparation()
+        val cutoff = configuration.settings.getSeparationCutoff()
         val knn = swarm.getKnn(k)
 
         var dv = Vector(0.0, 0.0, 0.0)
@@ -34,7 +33,7 @@ class SeparationRule(override val priority: Int,
                 dv += dvTemp
             }
         }
-        return Update(target, Pair(dv + delta.first, delta.second))
+        return Update(target, listOf(delta[0], dv + delta[1]))
     }
 }
 

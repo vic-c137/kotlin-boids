@@ -17,7 +17,9 @@ class ExampleSimulatorTest {
         val swarmSource = RandomSwarmSource::source
 
         val simulation = Simulation(configuration, rules, simulator, swarmSource)
-        val result = simulation.run()
+        val result = simulation.run({
+            return@run simulation.isComplete()
+        })
         assertEquals(result.last().iterationNumber, configuration.iterations)
     }
 }

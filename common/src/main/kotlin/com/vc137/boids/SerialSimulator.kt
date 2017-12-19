@@ -9,9 +9,9 @@ object SerialSimulator {
         swarm.forEach {
             var boid = it.copy()
 
-            var delta = Pair(
-                    Vector(0.0, 0.0, 0.0),
-                    Vector(0.0, 0.0, 0.0))
+            var delta = listOf(
+                    Vector(0.0, 0.0, 0.0), // Change in position, delta P
+                    Vector(0.0, 0.0, 0.0)) // Change in velocity, delta V
 
             val sortedSwarm = swarm.sortedBy { boid.position.distance(it.position) }
 
