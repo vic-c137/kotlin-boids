@@ -1,5 +1,7 @@
 package com.vc137.boids
 
+import com.vc137.boids.rules.getMaxVelocity
+
 object RandomSwarmSource {
 
     fun source(configuration: Configuration): List<Boid> {
@@ -14,11 +16,20 @@ object RandomSwarmSource {
             val endZ = configuration.worldBounds.second.z
 
             val id = Random().uuid()
+
+            val b = 1
             val pos = Vector(
-                    (startX..endX).random(),
-                    (startY..endY).random(),
-                    (startZ..endZ).random())
-            val vel = Vector(0.0, 0.0, 0.0)
+                    (startX+b..endX-b).random(),
+                    (startY+b..endY-b).random(),
+                    (startZ+b..endZ-b).random())
+
+            val vmax = configuration.settings.getMaxVelocity()
+            val vel = Vector(
+                    (-100.0..100.0).random(),
+                    (-100.0..100.0).random(),
+                    (-100.0..100.0).random())
+                    .truncate(vmax)
+
             val acc = Vector(0.0, 0.0, 0.0)
 
             boids.add(Boid(id, pos, vel, acc))

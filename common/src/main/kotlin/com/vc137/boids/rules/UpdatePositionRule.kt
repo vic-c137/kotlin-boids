@@ -35,15 +35,3 @@ class UpdatePositionRule(override val priority: Int) : Rule {
     }
 
 }
-
-val maxAccelerationSetting = "com.vc137.boids.rules.MAX_ACCELERATION_SETTING"
-
-private fun Map<String, Any>.getMaxAcceleration(): Double {
-    return max(get(maxAccelerationSetting) as? Double ?: 0.0, 0.0)
-}
-
-val maxVelocitySetting = "com.vc137.boids.rules.MAX_VELOCITY_SETTING"
-
-private fun Map<String, Any>.getMaxVelocity(): Double {
-    return max(get(maxVelocitySetting) as? Double ?: 0.0, 0.0)
-}

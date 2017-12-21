@@ -29,8 +29,3 @@ class KnnAlignmentRule(override val priority: Int): Rule {
 
 }
 
-val alignmentSetting = "com.vc137.boids.ALIGNMENT_SETTING"
-
-private fun Map<String, Any>.getAlignment(): Double {
-    return max(get(alignmentSetting) as? Double ?: 0.0, 1.0)
-}

@@ -23,8 +23,8 @@ class SeparationRule(override val priority: Int) : Rule {
         var dv = Vector(0.0, 0.0, 0.0)
 
         knn.forEach {
-            if(it.position.distance(target.position) < cutoff) {
-                val dist = it.position.distance(target.position)
+            val dist = it.position.distance(target.position)
+            if(dist < cutoff && it.id !== target.id) {
                 var dvTemp = it.position - target.position
                 dvTemp /= if(dist > 0)
                     -(dist * dist) / separation
@@ -35,16 +35,4 @@ class SeparationRule(override val priority: Int) : Rule {
         }
         return Update(target, listOf(delta[0], dv + delta[1]))
     }
-}
-
-val separationSetting = "com.vc137.boids.rules.SEPARATION_SETTING"
-
-private fun Map<String, Any>.getSeparation(): Double {
-    return max(get(separationSetting) as? Double ?: 0.0, 0.0)
-}
-
-val separationCutoffSetting = "com.vc137.boids.rules.SEPARATION_CUTOFF_SETTING"
-
-private fun Map<String, Any>.getSeparationCutoff(): Double {
-    return max(get(separationCutoffSetting) as? Double ?: 0.0, 0.0)
 }

@@ -10,12 +10,16 @@ object SerialSimulator {
             var boid = it.copy()
 
             var delta = listOf(
-                    Vector(0.0, 0.0, 0.0), // Change in position, delta P
-                    Vector(0.0, 0.0, 0.0)) // Change in velocity, delta V
+                    Vector(0.0, 0.0, 0.0),
+                    boid.velocity)
 
-            val sortedSwarm = swarm.sortedBy { boid.position.distance(it.position) }
+            val sortedSwarm = swarm.sortedBy {
+                boid.position.distance(it.position)
+            }
 
-            rules.sortedBy { it.priority }.forEach {
+            rules.sortedBy {
+                it.priority
+            }.forEach {
                 val(target, d) = it.apply(boid, sortedSwarm, configuration, delta)
                 boid = target
                 delta = d

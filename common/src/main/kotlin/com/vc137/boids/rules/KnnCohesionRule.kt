@@ -33,12 +33,6 @@ class KnnCohesionRule(override val priority: Int) : Rule {
     }
 }
 
-val cohesionSetting = "com.vc137.boids.rules.COHESION_SETTING"
-
-private fun Map<String, Any>.getCohesion(): Double {
-    return max(get(cohesionSetting) as? Double ?: 0.0, 0.0)
-}
-
 
 
 
