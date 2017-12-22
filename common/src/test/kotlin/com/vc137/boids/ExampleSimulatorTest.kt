@@ -1,32 +1,35 @@
 package com.vc137.boids
 
-import com.vc137.boids.data.Configuration
-import com.vc137.boids.data.Vector
-import com.vc137.boids.implementation.RandomSwarmSource
-import com.vc137.boids.implementation.SerialSimulator
-import com.vc137.boids.simulation.Rule
+import com.vc137.boids.implementation.getBaselineConfiguration
+import com.vc137.boids.implementation.getBaselineRules
+import com.vc137.boids.implementation.serialSimulator
+import com.vc137.boids.implementation.randomSwarmSource
 import com.vc137.boids.simulation.Simulation
 import com.vc137.boids.simulation.isComplete
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+@Suppress("unused")
 class ExampleSimulatorTest {
 
-    @Test fun testSerialSimulator() {
-
-        val worldBounds = Pair(
-                Vector(0.0, 0.0, 0.0),
-                Vector(0.0, 0.0, 0.0))
-        val properties = mapOf<String, Any>()
-        val configuration = Configuration(100, 50, worldBounds, properties)
-        val rules = listOf<Rule>()
-        val simulator = SerialSimulator::simulate
-        val swarmSource = RandomSwarmSource::source
-
+    /**
+     * Example test showing how to run and test a simulation
+     */
+    @Test
+    fun testSerialSimulator() {
+        // Setup
+        val configuration = getBaselineConfiguration()
+        val rules = getBaselineRules()
+        val simulator = ::serialSimulator
+        val swarmSource = ::randomSwarmSource
         val simulation = Simulation(configuration, rules, simulator, swarmSource)
+
+        // Run
         val result = simulation.run({
             return@run simulation.isComplete()
         })
-        assertEquals(result.last().iterationNumber, configuration.iterations)
+
+        // Assert
+        assertEquals(result.last().timestamp, configuration.iterations)
     }
 }

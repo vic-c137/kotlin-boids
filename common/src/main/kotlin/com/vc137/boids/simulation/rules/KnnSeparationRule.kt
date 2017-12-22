@@ -1,14 +1,19 @@
-package com.vc137.boids.simulation
+package com.vc137.boids.simulation.rules
 
 import com.vc137.boids.data.*
+import com.vc137.boids.simulation.Rule
+import com.vc137.boids.simulation.Update
 
 /**
  * Repel Boids from one another with a delta velocity inversely proportional
  * to the square of the distance between the target and its neighbors when
  * that distance drops below a defined cutoff point
  */
-class SeparationRule(override val priority: Int) : Rule {
+class KnnSeparationRule(override val priority: Int) : Rule {
 
+    /**
+     * @see [Rule]@[apply]
+     */
     override fun apply(target: Boid,
                        swarm: List<Boid>,
                        configuration: Configuration,

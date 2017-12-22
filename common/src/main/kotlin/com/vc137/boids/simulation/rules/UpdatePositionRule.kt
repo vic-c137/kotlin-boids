@@ -1,12 +1,17 @@
-package com.vc137.boids.simulation
+package com.vc137.boids.simulation.rules
 
 import com.vc137.boids.data.*
+import com.vc137.boids.simulation.Rule
+import com.vc137.boids.simulation.Update
 
 /**
  *  Rule to be executed last to update the position, velocity, etc. of the target
  */
 class UpdatePositionRule(override val priority: Int) : Rule {
 
+    /**
+     * @see [Rule]@[apply]
+     */
     override fun apply(target: Boid, swarm: List<Boid>, configuration: Configuration, delta: List<Vector>): Update {
 
         // Get target initial kinematic vectors

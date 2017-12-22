@@ -1,4 +1,4 @@
-package com.vc137.boids
+package com.vc137.boids.unit
 
 import com.vc137.boids.data.wrap
 import kotlin.test.Test

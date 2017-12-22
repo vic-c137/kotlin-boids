@@ -3,7 +3,11 @@ package com.vc137.boids.implementation
 import com.vc137.boids.data.Configuration
 import com.vc137.boids.data.Vector
 import com.vc137.boids.simulation.*
+import com.vc137.boids.simulation.rules.*
 
+/**
+ * @return A useful baseline [Configuration] for simulations
+ */
 fun getBaselineConfiguration(): Configuration {
     return Configuration(
             500,
@@ -20,9 +24,12 @@ fun getBaselineConfiguration(): Configuration {
                 alignmentSetting to 1.0))
 }
 
+/**
+ * @return A prioritized list of baseline [Rule]s for simulations
+ */
 fun getBaselineRules(): List<Rule> {
     return listOf(
-            SeparationRule(1),
+            KnnSeparationRule(1),
             KnnCohesionRule(2),
             KnnAlignmentRule(3),
             UpdatePositionRule(4))

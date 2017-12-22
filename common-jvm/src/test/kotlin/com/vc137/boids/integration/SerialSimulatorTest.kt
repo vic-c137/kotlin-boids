@@ -1,9 +1,6 @@
-package com.vc137.boids
+package com.vc137.boids.integration
 
-import com.vc137.boids.implementation.RandomSwarmSource
-import com.vc137.boids.implementation.SerialSimulator
-import com.vc137.boids.implementation.getBaselineConfiguration
-import com.vc137.boids.implementation.getBaselineRules
+import com.vc137.boids.implementation.*
 import com.vc137.boids.simulation.*
 import com.vc137.boids.visualization.createDefaultGnuplotScript
 import java.io.File
@@ -14,14 +11,27 @@ import kotlin.test.assertEquals
 
 class SerialSimulatorTest {
 
+    /**
+     * Live test that demonstrates rendering 3d visualization of
+     * the swarm simulation generated for the run - requires that
+     * gnuplot be installed on the test environment
+     *
+     * To install gnuplot with brew:
+     *
+     *     brew install gnuplot
+     *
+     * To install brew:
+     *
+     *     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+     */
     @Test
-    fun testSerialSimulatorRunsForExpectedNumberOfIterationsWithExpectedSwarmSize() {
+    fun testSerialSimulatorRunsForExpectedDuration() {
 
         // Setup
         val configuration = getBaselineConfiguration()
         val rules = getBaselineRules()
-        val simulator = SerialSimulator::simulate
-        val swarmSource = RandomSwarmSource::source
+        val simulator = ::serialSimulator
+        val swarmSource = ::randomSwarmSource
         val simulation = Simulation(configuration, rules, simulator, swarmSource)
 
         // Run
@@ -44,7 +54,7 @@ class SerialSimulatorTest {
         }
 
         // Assert
-        assertEquals(result.last().iterationNumber, configuration.iterations)
+        assertEquals(result.last().timestamp, configuration.iterations)
         assertEquals(result.size.toLong(), configuration.iterations + 1)
         assertEquals(result.first().swarm.size.toLong(), configuration.swarmSize)
     }

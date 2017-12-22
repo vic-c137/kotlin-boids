@@ -1,12 +1,17 @@
-package com.vc137.boids.simulation
+package com.vc137.boids.simulation.rules
 
 import com.vc137.boids.data.*
+import com.vc137.boids.simulation.Rule
+import com.vc137.boids.simulation.Update
 
 /**
  * Rule telling Boids to match velocity with their Knn
  */
 class KnnAlignmentRule(override val priority: Int): Rule {
 
+    /**
+     * @see [Rule]@[apply]
+     */
     override fun apply(target: Boid,
                        swarm: List<Boid>,
                        configuration: Configuration,

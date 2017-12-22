@@ -1,12 +1,17 @@
-package com.vc137.boids.simulation
+package com.vc137.boids.simulation.rules
 
 import com.vc137.boids.data.*
+import com.vc137.boids.simulation.Rule
+import com.vc137.boids.simulation.Update
 
 /**
  * Rule telling Boids to cohere to the center of mass of their Knn
  */
 class KnnCohesionRule(override val priority: Int) : Rule {
 
+    /**
+     * @see [Rule]@[apply]
+     */
     override fun apply(target: Boid,
                        swarm: List<Boid>,
                        configuration: Configuration,
