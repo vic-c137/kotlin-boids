@@ -1,9 +1,9 @@
 package com.vc137.boids.implementation
 
-import com.vc137.boids.data.Boid
-import com.vc137.boids.data.Configuration
-import com.vc137.boids.data.Vector
-import com.vc137.boids.data.distance
+import com.vc137.boids.Boid
+import com.vc137.boids.Configuration
+import com.vc137.boids.Vector
+import com.vc137.boids.distance
 import com.vc137.boids.simulation.Rule
 
 /**

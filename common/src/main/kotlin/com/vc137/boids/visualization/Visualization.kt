@@ -1,15 +1,15 @@
 package com.vc137.boids.visualization
 
-import com.vc137.boids.data.Boid
-import com.vc137.boids.data.Configuration
-import com.vc137.boids.data.State
-import com.vc137.boids.data.plus
+import com.vc137.boids.Boid
+import com.vc137.boids.Configuration
+import com.vc137.boids.State
+import com.vc137.boids.plus
 
 /**
  * Enum signifying if a visualization is 2d or 3d
  * @param rank the rank of the visualization space
  */
-@Suppress("unused")
+@Suppress("unused", "MemberVisibilityCanPrivate")
 enum class Rank(val rank: String) {
     R2D("2D"),
     R3D("3D")

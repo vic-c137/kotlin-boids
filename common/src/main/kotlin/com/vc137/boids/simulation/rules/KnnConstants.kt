@@ -1,6 +1,6 @@
 package com.vc137.boids.simulation.rules
 
-import com.vc137.boids.data.Boid
+import com.vc137.boids.Boid
 import kotlin.math.max
 
 /**

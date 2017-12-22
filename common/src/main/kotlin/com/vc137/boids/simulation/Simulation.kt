@@ -1,8 +1,8 @@
 package com.vc137.boids.simulation
 
-import com.vc137.boids.data.Boid
-import com.vc137.boids.data.Configuration
-import com.vc137.boids.data.State
+import com.vc137.boids.Boid
+import com.vc137.boids.Configuration
+import com.vc137.boids.State
 
 /**
  * A swarm simulation to be run with a given configuration
@@ -33,7 +33,6 @@ class Simulation(val configuration: Configuration,
      */
     fun run(completion: (()->Boolean)? = null): List<State> {
         var complete = false
-        history.clear()
         while (!complete) {
 
             val currentState = history.last()

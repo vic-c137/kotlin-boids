@@ -1,6 +1,6 @@
 package com.vc137.boids.implementation
 
-import com.vc137.boids.data.*
+import com.vc137.boids.*
 import com.vc137.boids.simulation.rules.getMaxVelocity
 
 /**
