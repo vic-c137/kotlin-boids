@@ -1,6 +1,6 @@
 package com.vc137.boids.simulation.rules
 
-import com.vc137.boids.*
+import com.vc137.boids.models.*
 import com.vc137.boids.simulation.Rule
 import com.vc137.boids.simulation.Update
 
@@ -13,7 +13,7 @@ class KnnCohesionRule(override val priority: Int) : Rule {
      * @see [Rule]@[apply]
      */
     override fun apply(target: Boid,
-                       swarm: List<Boid>,
+                       swarm: Swarm,
                        configuration: Configuration,
                        delta: List<Vector>): Update {
 

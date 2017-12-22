@@ -1,4 +1,4 @@
-package com.vc137.boids
+package com.vc137.boids.models
 
 import kotlinx.serialization.Serializable
 
@@ -9,4 +9,4 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class State(val timestamp: Long,
-                 val swarm: List<Boid>)
+                 val swarm: Swarm)

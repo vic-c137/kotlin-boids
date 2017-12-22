@@ -1,6 +1,6 @@
 package com.vc137.boids.simulation.rules
 
-import com.vc137.boids.*
+import com.vc137.boids.models.*
 import com.vc137.boids.simulation.Rule
 import com.vc137.boids.simulation.Update
 

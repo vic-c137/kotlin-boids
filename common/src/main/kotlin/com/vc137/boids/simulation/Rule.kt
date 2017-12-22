@@ -1,8 +1,9 @@
 package com.vc137.boids.simulation
 
-import com.vc137.boids.Vector
-import com.vc137.boids.Boid
-import com.vc137.boids.Configuration
+import com.vc137.boids.models.Vector
+import com.vc137.boids.models.Boid
+import com.vc137.boids.models.Configuration
+import com.vc137.boids.models.Swarm
 
 /**
  * Interface for a prioritized rule object to
@@ -27,7 +28,7 @@ interface Rule {
      * the chain of rules has run to completion
      */
     fun apply(target: Boid,
-              swarm: List<Boid>,
+              swarm: Swarm,
               configuration: Configuration,
               delta: List<Vector>): Update {
         return Update(target, delta)

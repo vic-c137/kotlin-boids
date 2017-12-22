@@ -1,7 +1,7 @@
 package com.vc137.boids.unit
 
-import com.vc137.boids.Vector
-import com.vc137.boids.distance
+import com.vc137.boids.models.Vector
+import com.vc137.boids.models.distance
 import kotlin.math.sqrt
 import kotlin.test.Test
 import kotlin.test.assertEquals

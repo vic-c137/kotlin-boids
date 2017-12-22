@@ -1,9 +1,9 @@
 package com.vc137.boids.visualization
 
-import com.vc137.boids.Boid
-import com.vc137.boids.Configuration
-import com.vc137.boids.State
-import com.vc137.boids.plus
+import com.vc137.boids.models.Boid
+import com.vc137.boids.models.Configuration
+import com.vc137.boids.models.State
+import com.vc137.boids.models.plus
 
 /**
  * Enum signifying if a visualization is 2d or 3d
@@ -20,7 +20,7 @@ enum class Rank(val rank: String) {
  * default setting values for the output script
  * @param outputFile the name of the output file generated
  * @param configuration the simulation [Configuration]
- * @param data the simulation output data to visualize
+ * @param data the simulation output models to visualize
  * @param appendln appends a line to the [StringBuilder]
  * @param rank the [Rank] of the visualization
  * @return the script to generate the output file
@@ -66,7 +66,7 @@ fun createDefaultGnuplotScript(outputFile: String,
  * @param xRange the [ClosedRange] for the x coordinates
  * @param yRange the [ClosedRange] for the y coordinates
  * @param zRange the [ClosedRange] for the z coordinates
- * @param data the simulation data to visualize
+ * @param data the simulation models to visualize
  * @param appendln appends a line to the [StringBuilder]
  * @param boidShape a shape provider function for [Boid]s
  * @param boidSize a size provider function for [Boid]s

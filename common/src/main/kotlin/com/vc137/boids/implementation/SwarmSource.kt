@@ -1,6 +1,7 @@
 package com.vc137.boids.implementation
 
 import com.vc137.boids.*
+import com.vc137.boids.models.*
 import com.vc137.boids.simulation.rules.getMaxVelocity
 
 /**
@@ -9,7 +10,7 @@ import com.vc137.boids.simulation.rules.getMaxVelocity
  * @param configuration the simulation [Configuration]
  * @return the initial swarm configuration
  */
-fun randomSwarmSource(configuration: Configuration): List<Boid> {
+fun randomSwarmSource(configuration: Configuration): Swarm {
     val boids = arrayListOf<Boid>()
     (1..configuration.swarmSize).forEach {
 

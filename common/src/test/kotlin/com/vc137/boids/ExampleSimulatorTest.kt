@@ -6,6 +6,7 @@ import com.vc137.boids.implementation.serialSimulator
 import com.vc137.boids.implementation.randomSwarmSource
 import com.vc137.boids.simulation.Simulation
 import com.vc137.boids.simulation.isComplete
+import com.vc137.boids.visualization.createDefaultGnuplotScript
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -23,11 +24,25 @@ class ExampleSimulatorTest {
         val simulator = ::serialSimulator
         val swarmSource = ::randomSwarmSource
         val simulation = Simulation(configuration, rules, simulator, swarmSource)
+        val pwd = currentSystemWorkingDirectory()
+        val outputFile = pwd + "/output/visualization_${currentSystemUnixTimestamp()}"
+        val scriptFile = pwd + "/output/create_visualization.gp"
 
         // Run
         val result = simulation.run({
             return@run simulation.isComplete()
         })
+
+        val script = createDefaultGnuplotScript(outputFile, configuration, result, { stringBuilder ->
+            stringBuilder.append("\n")
+        })
+
+        try {
+            overwriteSystemFile(scriptFile, script)
+            "gnuplot $scriptFile".awaitSystemCliCommand()
+        } catch (ex: Exception) {
+
+        }
 
         // Assert
         assertEquals(result.last().timestamp, configuration.iterations)

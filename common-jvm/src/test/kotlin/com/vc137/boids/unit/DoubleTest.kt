@@ -1,6 +1,6 @@
 package com.vc137.boids.unit
 
-import com.vc137.boids.wrap
+import com.vc137.boids.models.wrap
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

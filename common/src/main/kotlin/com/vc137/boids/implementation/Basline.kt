@@ -1,7 +1,7 @@
 package com.vc137.boids.implementation
 
-import com.vc137.boids.Configuration
-import com.vc137.boids.Vector
+import com.vc137.boids.models.Configuration
+import com.vc137.boids.models.Vector
 import com.vc137.boids.simulation.*
 import com.vc137.boids.simulation.rules.*
 

@@ -1,11 +1,12 @@
 package com.vc137.boids.integration
 
+import com.vc137.boids.awaitSystemCliCommand
+import com.vc137.boids.currentSystemUnixTimestamp
+import com.vc137.boids.currentSystemWorkingDirectory
 import com.vc137.boids.implementation.*
+import com.vc137.boids.overwriteSystemFile
 import com.vc137.boids.simulation.*
 import com.vc137.boids.visualization.createDefaultGnuplotScript
-import java.io.File
-import java.nio.file.Paths
-import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -16,11 +17,11 @@ class SerialSimulatorTest {
      * the swarm simulation generated for the run - requires that
      * gnuplot be installed on the test environment
      *
-     * To install gnuplot with brew:
+     * To install gnuplot with Homebrew:
      *
      *     brew install gnuplot
      *
-     * To install brew:
+     * To install Homebrew:
      *
      *     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
      */
@@ -33,22 +34,21 @@ class SerialSimulatorTest {
         val simulator = ::serialSimulator
         val swarmSource = ::randomSwarmSource
         val simulation = Simulation(configuration, rules, simulator, swarmSource)
+        val pwd = currentSystemWorkingDirectory()
+        val outputFile = pwd + "/output/visualization_${currentSystemUnixTimestamp()}"
+        val scriptFile = pwd + "/output/create_visualization.gp"
 
         // Run
         val result = simulation.run()
 
-        val pwd = Paths.get("").toAbsolutePath().toString()
-        val outputFile = pwd + "/output/visualization_${Date().time}"
-        val scriptFile = pwd + "/output/create_visualization.gp"
+        // Visualize
         val script = createDefaultGnuplotScript(outputFile, configuration, result, { stringBuilder ->
             stringBuilder.append("\n")
         })
 
         try {
-            File(scriptFile).printWriter().use { out ->
-                out.print(script)
-            }
-            Runtime.getRuntime().exec("gnuplot $scriptFile")
+            overwriteSystemFile(scriptFile, script)
+            "gnuplot $scriptFile".awaitSystemCliCommand()
         } catch (ex: Exception) {
 
         }

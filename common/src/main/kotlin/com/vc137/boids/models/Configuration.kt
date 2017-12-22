@@ -1,5 +1,6 @@
-package com.vc137.boids
+package com.vc137.boids.models
 
+import com.vc137.boids.models.Vector
 import kotlinx.serialization.Serializable
 
 /**
@@ -7,8 +8,8 @@ import kotlinx.serialization.Serializable
  * @property iterations the number of loops to run the simulation for
  * @property swarmSize the number of agents to use in the swarm
  * @property worldBounds the size of the 3d simulation space
- * @property settings a data store for custom configuration values
- * @constructor Creates a new configuration from provided data
+ * @property settings a models store for custom configuration values
+ * @constructor Creates a new configuration from provided models
  */
 @Serializable
 data class Configuration(val iterations: Long,

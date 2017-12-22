@@ -1,4 +1,4 @@
-package com.vc137.boids
+package com.vc137.boids.models
 
 import kotlinx.serialization.Serializable
 import kotlin.math.abs

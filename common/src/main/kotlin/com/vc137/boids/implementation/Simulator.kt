@@ -1,9 +1,6 @@
 package com.vc137.boids.implementation
 
-import com.vc137.boids.Boid
-import com.vc137.boids.Configuration
-import com.vc137.boids.Vector
-import com.vc137.boids.distance
+import com.vc137.boids.models.*
 import com.vc137.boids.simulation.Rule
 
 /**
@@ -16,7 +13,7 @@ import com.vc137.boids.simulation.Rule
  */
 fun serialSimulator(configuration: Configuration,
                     rules: List<Rule>,
-                    swarm: List<Boid>): List<Boid> {
+                    swarm: Swarm): List<Boid> {
     val newSwarm = arrayListOf<Boid>()
 
     swarm.forEach {

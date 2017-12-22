@@ -1,8 +1,8 @@
 package com.vc137.boids.simulation
 
-import com.vc137.boids.Boid
-import com.vc137.boids.Configuration
-import com.vc137.boids.State
+import com.vc137.boids.models.Configuration
+import com.vc137.boids.models.State
+import com.vc137.boids.models.Swarm
 
 /**
  * A swarm simulation to be run with a given configuration
@@ -13,8 +13,8 @@ import com.vc137.boids.State
  */
 class Simulation(val configuration: Configuration,
                  private val rules: List<Rule>,
-                 private val simulator: (Configuration, List<Rule>, List<Boid>)->List<Boid>,
-                 swarmSource: (Configuration) -> List<Boid> ) {
+                 private val simulator: (Configuration, List<Rule>, Swarm)->Swarm,
+                 swarmSource: (Configuration) -> Swarm ) {
 
     /**
      * @property history the [State] history of the [Simulation]
