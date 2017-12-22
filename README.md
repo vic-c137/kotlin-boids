@@ -1,6 +1,6 @@
 # Boids swarm intelligence simulation
 
-This is a Boids simulation by [Vic C137](mailto:vic.c137.a@gmail.com). This repository contains the randomSwarmSource code of the application.
+This is a Boids simulation by [Vic C137](mailto:vic.c137.a@gmail.com). This repository contains the source code of the application.
 
 This is a *full-stack, cross-platform* **Kotlin** application.
 
