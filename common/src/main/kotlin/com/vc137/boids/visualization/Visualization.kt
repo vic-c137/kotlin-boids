@@ -1,22 +1,24 @@
 package com.vc137.boids.visualization
 
-import com.vc137.boids.Boid
-import com.vc137.boids.Configuration
-import com.vc137.boids.State
-import com.vc137.boids.plus
+import com.vc137.boids.data.Boid
+import com.vc137.boids.data.Configuration
+import com.vc137.boids.data.State
+import com.vc137.boids.data.plus
 
+@Suppress("unused")
 enum class Rank(val rank: String) {
     R2D("2D"),
     R3D("3D")
 }
 
-fun createDefault3DGnuplotScript(outputFile: String,
-                                 configuration: Configuration,
-                                 data: List<State>,
-                                 appendln: (StringBuilder) -> Unit): String {
+fun createDefaultGnuplotScript(outputFile: String,
+                               configuration: Configuration,
+                               data: List<State>,
+                               appendln: (StringBuilder) -> Unit,
+                               rank: Rank = Rank.R3D): String {
     val b = configuration.worldBounds
     return createGnuplotScript(
-            Rank.R3D,
+            rank,
             5,
             outputFile,
             b.first.x.toInt()..b.second.x.toInt(),

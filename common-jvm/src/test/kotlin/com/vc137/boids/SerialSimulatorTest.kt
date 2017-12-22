@@ -1,7 +1,11 @@
 package com.vc137.boids
 
-import com.vc137.boids.rules.*
-import com.vc137.boids.visualization.createDefault3DGnuplotScript
+import com.vc137.boids.implementation.RandomSwarmSource
+import com.vc137.boids.implementation.SerialSimulator
+import com.vc137.boids.implementation.getBaselineConfiguration
+import com.vc137.boids.implementation.getBaselineRules
+import com.vc137.boids.simulation.*
+import com.vc137.boids.visualization.createDefaultGnuplotScript
 import java.io.File
 import java.nio.file.Paths
 import java.util.*
@@ -14,18 +18,8 @@ class SerialSimulatorTest {
     fun testSerialSimulatorRunsForExpectedNumberOfIterationsWithExpectedSwarmSize() {
 
         // Setup
-        val worldBounds = Pair(
-                Vector(0.0, 0.0, 0.0),
-                Vector(1000.0, 1000.0, 1000.0))
-        val properties = mapOf(
-                kSetting to 10,
-                maxVelocitySetting to 10.0,
-                separationSetting to 100.0,
-                separationCutoffSetting to 20.0)
-        val configuration = Configuration(100, 500, worldBounds, properties)
-        val rules = listOf(
-                //SeparationRule(1),
-                UpdatePositionRule(2))
+        val configuration = getBaselineConfiguration()
+        val rules = getBaselineRules()
         val simulator = SerialSimulator::simulate
         val swarmSource = RandomSwarmSource::source
         val simulation = Simulation(configuration, rules, simulator, swarmSource)
@@ -34,9 +28,9 @@ class SerialSimulatorTest {
         val result = simulation.run()
 
         val pwd = Paths.get("").toAbsolutePath().toString()
-        val outputFile = pwd + "/visualization_${Date().time}"
-        val scriptFile = pwd + "/create_visualization.gp"
-        val script = createDefault3DGnuplotScript(outputFile, configuration, result, { stringBuilder ->
+        val outputFile = pwd + "/output/visualization_${Date().time}"
+        val scriptFile = pwd + "/output/create_visualization.gp"
+        val script = createDefaultGnuplotScript(outputFile, configuration, result, { stringBuilder ->
             stringBuilder.append("\n")
         })
 

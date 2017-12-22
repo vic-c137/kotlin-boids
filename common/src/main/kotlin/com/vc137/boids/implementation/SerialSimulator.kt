@@ -1,4 +1,10 @@
-package com.vc137.boids
+package com.vc137.boids.implementation
+
+import com.vc137.boids.data.Boid
+import com.vc137.boids.data.Configuration
+import com.vc137.boids.data.Vector
+import com.vc137.boids.data.distance
+import com.vc137.boids.simulation.Rule
 
 object SerialSimulator {
     fun simulate(configuration: Configuration,

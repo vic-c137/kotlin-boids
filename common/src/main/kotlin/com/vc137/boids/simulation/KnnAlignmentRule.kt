@@ -1,7 +1,6 @@
-package com.vc137.boids.rules
+package com.vc137.boids.simulation
 
-import com.vc137.boids.*
-import kotlin.math.max
+import com.vc137.boids.data.*
 
 /**
  * Rule telling Boids to match velocity with their Knn
@@ -22,7 +21,7 @@ class KnnAlignmentRule(override val priority: Int): Rule {
             dv += it.velocity
         }
 
-        dv *= alignment / knn.size
+        dv /= alignment * knn.size
 
         return Update(target, listOf(delta[0], dv + delta[1]))
     }

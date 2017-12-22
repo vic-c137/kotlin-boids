@@ -1,7 +1,6 @@
-package com.vc137.boids.rules
+package com.vc137.boids.simulation
 
-import com.vc137.boids.*
-import kotlin.math.max
+import com.vc137.boids.data.*
 
 /**
  * Repel Boids from one another with a delta velocity inversely proportional

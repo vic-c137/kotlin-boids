@@ -1,6 +1,7 @@
-package com.vc137.boids
+package com.vc137.boids.implementation
 
-import com.vc137.boids.rules.getMaxVelocity
+import com.vc137.boids.data.*
+import com.vc137.boids.simulation.getMaxVelocity
 
 object RandomSwarmSource {
 
@@ -19,9 +20,9 @@ object RandomSwarmSource {
 
             val b = 1
             val pos = Vector(
-                    (startX+b..endX-b).random(),
-                    (startY+b..endY-b).random(),
-                    (startZ+b..endZ-b).random())
+                    (startX + b..endX - b).random(),
+                    (startY + b..endY - b).random(),
+                    (startZ + b..endZ - b).random())
 
             val vmax = configuration.settings.getMaxVelocity()
             val vel = Vector(

@@ -1,5 +1,12 @@
 package com.vc137.boids
 
+import com.vc137.boids.data.Configuration
+import com.vc137.boids.data.Vector
+import com.vc137.boids.implementation.RandomSwarmSource
+import com.vc137.boids.implementation.SerialSimulator
+import com.vc137.boids.simulation.Rule
+import com.vc137.boids.simulation.Simulation
+import com.vc137.boids.simulation.isComplete
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

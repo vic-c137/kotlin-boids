@@ -1,4 +1,8 @@
-package com.vc137.boids
+package com.vc137.boids.simulation
+
+import com.vc137.boids.data.Vector
+import com.vc137.boids.data.Boid
+import com.vc137.boids.data.Configuration
 
 interface Rule {
     val priority: Int

@@ -1,4 +1,4 @@
-package com.vc137.boids
+package com.vc137.boids.data
 
 import java.security.SecureRandom
 import java.util.*

@@ -1,4 +1,8 @@
-package com.vc137.boids
+package com.vc137.boids.simulation
+
+import com.vc137.boids.data.Boid
+import com.vc137.boids.data.Configuration
+import com.vc137.boids.data.State
 
 class Simulation(val configuration: Configuration,
                  val rules: List<Rule>,

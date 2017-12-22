@@ -1,7 +1,6 @@
-package com.vc137.boids.rules
+package com.vc137.boids.simulation
 
-import com.vc137.boids.*
-import kotlin.math.max
+import com.vc137.boids.data.*
 
 /**
  * Rule telling Boids to cohere to the center of mass of their Knn
@@ -18,7 +17,7 @@ class KnnCohesionRule(override val priority: Int) : Rule {
         val knn = swarm.getKnn(k)
 
         // Find the center of mass of the Knn
-        var center = Vector(0.0,0.0,0.0)
+        var center = Vector(0.0, 0.0, 0.0)
         knn.forEach {
             center += it.position
         }

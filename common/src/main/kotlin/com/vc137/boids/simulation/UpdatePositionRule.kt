@@ -1,7 +1,6 @@
-package com.vc137.boids.rules
+package com.vc137.boids.simulation
 
-import com.vc137.boids.*
-import kotlin.math.max
+import com.vc137.boids.data.*
 
 /**
  *  Rule to be executed last to update the position, velocity, etc. of the target

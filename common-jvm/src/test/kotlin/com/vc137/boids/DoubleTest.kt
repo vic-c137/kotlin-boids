@@ -1,5 +1,6 @@
 package com.vc137.boids
 
+import com.vc137.boids.data.wrap
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
