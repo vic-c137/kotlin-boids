@@ -1,8 +1,5 @@
 package com.vc137.boids.models
 
-import kotlinx.serialization.Serializable
-
-// test
 
 /**
  * A swarm agent used in swarm intelligence simulations
@@ -11,7 +8,6 @@ import kotlinx.serialization.Serializable
  * @property properties custom properties of the agent
  * @constructor Creates a new swarm agent
  */
-@Serializable
 data class Boid(val id: String,
                 val derivatives: List<Vector>,
                 val properties: Map<String, Any> = mapOf()) {

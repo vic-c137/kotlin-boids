@@ -1,5 +1,7 @@
 package com.vc137.boids
 
+import kotlin.experimental.and
+
 /**
  * Synchronously execute a system command and return the exit code
  * @param command the CLI command to run on the system
@@ -32,4 +34,20 @@ expect fun currentSystemWorkingDirectory(): String
  * @param filePath the path of the file including the name
  * @param data the models to write overwrite the file with
  */
-expect fun overwriteSystemFile(filePath: String, data: String)
+expect fun overwriteSystemFile(filePath: String, data: String): Any
+
+
+private val hex = charArrayOf(
+        '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f')
+
+fun ByteArray.toHexString(): String {
+    val chars = CharArray(size * 2)
+    for(i in indices) {
+        val v = (this[i] and 0xFF.toByte()).toInt()
+        chars[i * 2] = hex[v ushr 4]
+        chars[i * 2 + 1] = hex[v and 0x0F]
+    }
+    var result = ""
+    chars.forEach { result += it }
+    return result
+}

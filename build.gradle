@@ -22,3 +22,5 @@ allprojects {
         jcenter()
     }
 }
+
+apply from: 'dependencies.gradle'

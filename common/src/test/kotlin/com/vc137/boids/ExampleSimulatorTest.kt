@@ -6,6 +6,7 @@ import com.vc137.boids.implementation.serialSimulator
 import com.vc137.boids.implementation.randomSwarmSource
 import com.vc137.boids.simulation.Simulation
 import com.vc137.boids.simulation.isComplete
+import com.vc137.boids.visualization.LineAppender
 import com.vc137.boids.visualization.createDefaultGnuplotScript
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -33,8 +34,10 @@ class ExampleSimulatorTest {
             return@run simulation.isComplete()
         })
 
-        val script = createDefaultGnuplotScript(outputFile, configuration, result, { stringBuilder ->
-            stringBuilder.append("\n")
+        val script = createDefaultGnuplotScript(outputFile, configuration, result, object : LineAppender {
+            override fun appendln(builder: StringBuilder) {
+                builder.append("\n")
+            }
         })
 
         try {

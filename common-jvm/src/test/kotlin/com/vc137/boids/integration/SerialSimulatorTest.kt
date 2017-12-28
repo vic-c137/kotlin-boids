@@ -6,6 +6,7 @@ import com.vc137.boids.currentSystemWorkingDirectory
 import com.vc137.boids.implementation.*
 import com.vc137.boids.overwriteSystemFile
 import com.vc137.boids.simulation.*
+import com.vc137.boids.visualization.LineAppender
 import com.vc137.boids.visualization.createDefaultGnuplotScript
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -42,8 +43,10 @@ class SerialSimulatorTest {
         val result = simulation.run()
 
         // Visualize
-        val script = createDefaultGnuplotScript(outputFile, configuration, result, { stringBuilder ->
-            stringBuilder.append("\n")
+        val script = createDefaultGnuplotScript(outputFile, configuration, result, object : LineAppender {
+            override fun appendln(builder: StringBuilder) {
+                builder.append("\n")
+            }
         })
 
         try {

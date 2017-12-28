@@ -17,3 +17,4 @@ expect class Random() {
  * @receiver the closed range of allowed values
  */
 expect fun ClosedRange<Double>.random(): Double
+

@@ -15,6 +15,22 @@ enum class Rank(val rank: String) {
     R3D("3D")
 }
 
+interface LineAppender {
+    fun appendln(builder: StringBuilder)
+}
+
+interface ShapeProvider {
+    fun shape(boid: Boid): String
+}
+
+interface SizeProvider {
+    fun size(boid: Boid): Double
+}
+
+interface ColorProvider {
+    fun color(boid: Boid): String
+}
+
 /**
  * Create a gnuplot visualization script using a set of
  * default setting values for the output script
@@ -28,7 +44,7 @@ enum class Rank(val rank: String) {
 fun createDefaultGnuplotScript(outputFile: String,
                                configuration: Configuration,
                                data: List<State>,
-                               appendln: (StringBuilder) -> Unit,
+                               appendln: LineAppender,
                                rank: Rank = Rank.R3D): String {
     val b = configuration.worldBounds
     return createGnuplotScript(
@@ -39,22 +55,7 @@ fun createDefaultGnuplotScript(outputFile: String,
             b.first.y.toInt()..b.second.y.toInt(),
             b.first.z.toInt()..b.second.z.toInt(),
             data,
-            appendln,
-            object : (Boid) -> String? {
-                override fun invoke(p1: Boid): String? {
-                    return "circle"
-                }
-            },
-            object : (Boid) -> Double? {
-                override fun invoke(p1: Boid): Double? {
-                    return 0.0025
-                }
-            },
-            object : (Boid) -> String? {
-                override fun invoke(p1: Boid): String? {
-                    return "navy"
-                }
-            })
+            appendln)
 }
 
 /**
@@ -67,10 +68,10 @@ fun createDefaultGnuplotScript(outputFile: String,
  * @param yRange the [ClosedRange] for the y coordinates
  * @param zRange the [ClosedRange] for the z coordinates
  * @param data the simulation models to visualize
- * @param appendln appends a line to the [StringBuilder]
- * @param boidShape a shape provider function for [Boid]s
- * @param boidSize a size provider function for [Boid]s
- * @param boidColor a color provider function for [Boid]s
+ * @param appender appends a line to the [StringBuilder]
+ * @param shapeProvider a shape provider function for [Boid]s
+ * @param sizeProvider a size provider function for [Boid]s
+ * @param colorProvider a color provider function for [Boid]s
  * @return the script to generate the output file
  */
 fun createGnuplotScript(rank: Rank,
@@ -80,30 +81,30 @@ fun createGnuplotScript(rank: Rank,
                         yRange: ClosedRange<Int>,
                         zRange: ClosedRange<Int>,
                         data: List<State>,
-                        appendln: (StringBuilder)->Unit,
-                        boidShape: (Boid)->String?,
-                        boidSize: (Boid)->Double?,
-                        boidColor: (Boid)->String?): String {
+                        appender: LineAppender,
+                        shapeProvider: ShapeProvider? = null,
+                        sizeProvider: SizeProvider? = null,
+                        colorProvider: ColorProvider? = null): String {
 
     val builder = StringBuilder()
 
     builder.append("reset")
-    appendln(builder)
+    appender.appendln(builder)
 
     builder.append("set terminal gif animate delay $delay")
-    appendln(builder)
+    appender.appendln(builder)
 
     builder.append("set output '$outputFile.gif'")
-    appendln(builder)
+    appender.appendln(builder)
 
     builder.append("set xrange [${xRange.start}:${xRange.endInclusive}]")
-    appendln(builder)
+    appender.appendln(builder)
 
     builder.append("set yrange [${yRange.start}:${yRange.endInclusive}]")
-    appendln(builder)
+    appender.appendln(builder)
 
     builder.append("set zrange [${zRange.start}:${zRange.endInclusive}]")
-    appendln(builder)
+    appender.appendln(builder)
 
     val plot = when(rank) {
         Rank.R2D -> "plot"
@@ -111,24 +112,24 @@ fun createGnuplotScript(rank: Rank,
     }
 
     builder.append("$plot 0")
-    appendln(builder)
+    appender.appendln(builder)
 
     data.forEach {
         it.swarm.forEachIndexed { index, boid ->
             val p = boid.position
             val v = p + boid.velocity
             builder.append("set arrow ${index + 1} from ${p.x},${p.y},${p.z} to ${v.x},${v.y},${v.z}")
-            appendln(builder)
+            appender.appendln(builder)
 
-            val shape = boidShape(boid) ?: "circle"
-            val size = boidSize(boid) ?: 0.005
-            val color = boidColor(boid) ?: "navy"
+            val shape = shapeProvider?.shape(boid) ?: "circle"
+            val size = sizeProvider?.size(boid) ?: 0.0025
+            val color = colorProvider?.color(boid) ?: "navy"
             builder.append("set object ${index + 1} $shape at ${p.x},${p.y},${p.z} size scr $size fc rgb \"$color\"")
-            appendln(builder)
+            appender.appendln(builder)
         }
 
         builder.append("replot")
-        appendln(builder)
+        appender.appendln(builder)
     }
 
     builder.append("set output")

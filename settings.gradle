@@ -1,6 +1,10 @@
 rootProject.name = 'boids'
 include 'common'
 include 'common-jvm'
+include 'common-js'
+include 'common-client'
+include 'common-client-jvm'
+include 'common-client-js'
 
 if (INCLUDE_ANDROID == "true") {
     include 'android', 'android:app'

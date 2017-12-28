@@ -1,6 +1,5 @@
 package com.vc137.boids.models
 
-import kotlinx.serialization.Serializable
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -11,7 +10,6 @@ import kotlin.math.sqrt
  * @property z the z coordinate [Double] value
  * @constructor Creates a new vector with specified coordinates
  */
-@Serializable
 data class Vector(val x: Double, val y: Double, val z: Double)
 
 /**
