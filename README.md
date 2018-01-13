@@ -13,7 +13,7 @@ Open the project in IntelliJ IDEA 2017.3.3 or later, then from the command line:
 
  * Run `./gradlew :cli-jvm:run`
 
-The simulation visualization output file pate will be displayed on the console.
+The simulation visualization output file path will be displayed on the console.
 
 
 
