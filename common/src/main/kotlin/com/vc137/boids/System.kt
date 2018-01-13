@@ -1,5 +1,6 @@
 package com.vc137.boids
 
+import com.vc137.boids.models.Configuration
 import kotlin.experimental.and
 
 /**
@@ -35,6 +36,14 @@ expect fun currentSystemWorkingDirectory(): String
  * @param data the models to write overwrite the file with
  */
 expect fun overwriteSystemFile(filePath: String, data: String): Any
+
+/**
+ * Parse a JSON string into a [Configuration]
+ * @param json the JSON string to parse
+ * @return the configuration parsed, or null if none
+ */
+expect fun parseConfigurationJson(json: String): Configuration?
+
 
 
 private val hex = charArrayOf(
