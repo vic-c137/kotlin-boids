@@ -5,7 +5,9 @@ include 'common-js'
 include 'common-client'
 include 'common-client-jvm'
 include 'common-client-js'
+include 'cli-jvm'
 
 if (INCLUDE_ANDROID == "true") {
     include 'android', 'android:app'
 }
+

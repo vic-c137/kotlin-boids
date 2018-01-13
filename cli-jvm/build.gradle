@@ -1,0 +1,21 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    compile project(":common-jvm")
+    compile dep.kotlin_stdlib
+}
+
+task run(dependsOn: classes, type: JavaExec) {
+    main = 'com.vc137.boids.BoidsKt'
+    classpath = sourceSets.main.runtimeClasspath
+    ignoreExitValue(true)
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.kotlin
+}
+
+artifacts {
+    archives sourcesJar
+}

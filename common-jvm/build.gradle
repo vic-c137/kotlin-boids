@@ -1,20 +1,19 @@
 apply plugin: 'kotlin-platform-jvm'
-apply plugin: 'kotlinx-serialization'
+
+archivesBaseName = 'vic-c137-boids-common-jvm'
 
 dependencies {
     expectedBy project(':common')
-
-    implementation dep.kotlin_stdlib_jre8
-    implementation dep.kotlin_serialization_jvm
+    implementation dep.kotlin_stdlib
     implementation dep.gson
-
-    testImplementation dep.junit
-    testImplementation dep.kotlin_junit
+    testImplementation dep.kotlin_test_junit
 }
 
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.kotlin
 }
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+
+artifacts {
+    archives sourcesJar
 }

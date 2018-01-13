@@ -1,4 +1,5 @@
-import com.vc137.boids.*
+package com.vc137.boids
+
 import com.vc137.boids.implementation.getBaselineConfiguration
 import com.vc137.boids.implementation.getBaselineRules
 import com.vc137.boids.implementation.randomSwarmSource
@@ -8,11 +9,6 @@ import com.vc137.boids.visualization.LineAppender
 import com.vc137.boids.visualization.createDefaultGnuplotScript
 
 fun main(args: Array<String>) {
-    runSimulation(args)
-}
-
-fun runSimulation(args: Array<String>) {
-
     System.out.println("Configuring simulation...")
     val configuration = args.getConfiguration({ t: Throwable -> t.printStackTrace() })
             ?: getBaselineConfiguration()
@@ -24,6 +20,9 @@ fun runSimulation(args: Array<String>) {
 
     val outputFile = args.getOutputFile() ?: pwd + "/visualization_${currentSystemUnixTimestamp()}"
     val scriptFile = args.getRenderScriptFile() ?: pwd + "/create_visualization.gp"
+
+    System.out.println("Output file path: $outputFile.gif")
+    System.out.println("Script file path: $scriptFile")
 
     try {
         // Run

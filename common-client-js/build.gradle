@@ -1,10 +1,6 @@
 apply plugin: 'kotlin-platform-js'
 
-repositories {
-    mavenCentral()
+dependencies {
+
 }
 
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
-    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
-}

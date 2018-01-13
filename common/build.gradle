@@ -1,8 +1,18 @@
 apply plugin: 'kotlin-platform-common'
-apply plugin: 'kotlinx-serialization'
+
+archivesBaseName = 'vic-c137-boids-common'
 
 dependencies {
-    implementation dep.serialization_common
     implementation dep.kotlin_stdlib_common
+    testImplementation dep.kotlin_test_annotations_common
     testImplementation dep.kotlin_test_common
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.kotlin
+}
+
+artifacts {
+    archives sourcesJar
 }

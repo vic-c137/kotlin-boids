@@ -1,26 +1,58 @@
 allprojects {
-    buildscript {
-        ext.kotlin_version = '1.2.0'
-        ext.serialization_version = '0.3'
-
-        repositories {
-            maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
-            maven { url "https://kotlin.bintray.com/kotlinx" }
-            maven { url 'https://maven.google.com' }
-            jcenter()
-        }
-        dependencies {
-            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-            classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
-        }
-
-    }
-    repositories {
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
-        maven { url "https://kotlin.bintray.com/kotlinx" }
-        maven { url 'https://maven.google.com' }
-        jcenter()
-    }
+    group 'com.vc137.boids'
+    version '1.0.0-SNAPSHOT'
 }
 
-apply from: 'dependencies.gradle'
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4.1'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+buildscript {
+    ext.kotlin_version = '1.2.10'
+//    ext.serialization_version = '0.3'
+
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "com.eriwen:gradle-js-plugin:2.14.1"
+        classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        //classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
+    }
+
+}
+
+ext {
+    gson_version = '2.8.2'
+    junit_version = '4.12'
+    node_version = '8.9.4'
+    qunitVersion = '2.4.1'
+
+    dep = [
+        kotlin_stdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+        kotlin_stdlib_common: "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version",
+        kotlin_stdlib_js: "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version",
+
+        //kotlin_serialization_jvm: "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version",
+        //serialization_common: "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version",
+
+        junit: "junit:junit:$junit_version",
+        kotlin_test_common: "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version",
+        kotlin_test_annotations_common: "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version",
+        kotlin_test_js: "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version",
+        kotlin_test_junit: "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version",
+
+        gson: "com.google.code.gson:gson:$gson_version",
+    ]
+}
+
+subprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
