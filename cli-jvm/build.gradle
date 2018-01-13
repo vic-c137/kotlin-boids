@@ -1,12 +1,33 @@
+apply plugin: 'java'
 apply plugin: 'kotlin'
+
 
 dependencies {
     compile project(":common-jvm")
     compile dep.kotlin_stdlib
 }
 
-task run(dependsOn: classes, type: JavaExec) {
-    main = 'com.vc137.boids.BoidsKt'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.vc137.boids.Main',
+                'Implementation-Version': version
+    }
+    baseName = 'boids'
+
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
+    with jar
+}
+
+task run(dependsOn: classes, type:JavaExec) {
+    main = 'com.vc137.boids.Boids'
     classpath = sourceSets.main.runtimeClasspath
     ignoreExitValue(true)
 }
@@ -14,6 +35,11 @@ task run(dependsOn: classes, type: JavaExec) {
 task sourcesJar(type: Jar) {
     classifier = 'sources'
     from sourceSets.main.kotlin
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin/'
+    test.java.srcDirs += 'src/test/kotlin/'
 }
 
 artifacts {

@@ -8,7 +8,7 @@ import com.vc137.boids.simulation.Simulation
 import com.vc137.boids.visualization.LineAppender
 import com.vc137.boids.visualization.createDefaultGnuplotScript
 
-fun main(args: Array<String>) {
+fun simulate(args: Array<String>) {
     System.out.println("Configuring simulation...")
     val configuration = args.getConfiguration({ t: Throwable -> t.printStackTrace() })
             ?: getBaselineConfiguration()
