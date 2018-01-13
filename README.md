@@ -11,7 +11,7 @@ This is a *full-stack, cross-platform* **Kotlin** application.
 
 Open the project in IntelliJ IDEA 2017.3.3 or later, then from the command line:
 
- * Run `./gradlew :cli-jvm:run`
+ * Run `./gradlew :cli-jvm:runSimulation`
 
 The simulation visualization output file path will be displayed on the console.
 

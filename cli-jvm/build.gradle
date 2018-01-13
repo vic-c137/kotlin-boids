@@ -1,6 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'kotlin'
+apply plugin: 'application'
 
+mainClassName = "com.vc137.boids.Main"
 
 dependencies {
     compile project(":common-jvm")
@@ -12,7 +14,7 @@ targetCompatibility = 1.8
 
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Main-Class': 'com.vc137.boids.Main',
+        attributes 'Main-Class': 'com.vc137.boids.MainKt',
                 'Implementation-Version': version
     }
     baseName = 'boids'
@@ -26,8 +28,8 @@ task fatJar(type: Jar) {
     with jar
 }
 
-task run(dependsOn: classes, type:JavaExec) {
-    main = 'com.vc137.boids.Boids'
+task runSimulation(dependsOn: classes, type:JavaExec) {
+    main = 'com.vc137.boids.Main'
     classpath = sourceSets.main.runtimeClasspath
     ignoreExitValue(true)
 }
